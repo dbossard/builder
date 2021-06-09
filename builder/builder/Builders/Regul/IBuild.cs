@@ -1,6 +1,6 @@
 ﻿using builder.Models;
 
-namespace builder.Builders
+namespace builder.Builders.Regul
 {
     public interface IBuild
     {

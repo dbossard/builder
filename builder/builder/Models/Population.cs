@@ -11,5 +11,7 @@ namespace builder.Models
         public IReadOnlyCollection<int> LegalEntityIds { get; set; }
         public IReadOnlyCollection<int> DepartmentIds { get; set; }
         public IReadOnlyCollection<int> ProfileIds { get; set; }
+
+        public int ReglementaireId { get; set; }
     }
 }

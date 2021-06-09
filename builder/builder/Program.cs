@@ -1,4 +1,5 @@
-﻿using builder.Builders;
+﻿using builder.Builders.Populations;
+using builder.Builders.Regul;
 using builder.Models;
 using System;
 
@@ -17,12 +18,14 @@ namespace builder
             //        .ComptesImpactants(Comptes.FormationInterne)
             //        .Build();
 
-            RegulBuilder.Create()
+            var rule = RegulBuilder.OnReglementaire(1)
                 .ComptesImpactants(Comptes.Maladie, Comptes.Teletravail)
                 .CompteCible(Comptes.Rtt)
+                .Population(pop => pop.WithProfiles(1))
                 .Build();
 
-            RegulBuilder.Create().Build();
+            //RegulBuilder.Create().Population(pop => pop.WithProfiles()).Build();
+
         }
     }
 }

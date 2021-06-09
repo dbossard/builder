@@ -8,6 +8,7 @@ namespace builder.Models
 {
     public class RegularizationRule
     {
+        public int ReglementaireId { get; set; }
         public int Id { get; set; }
         public Account TargetAccount { get; set; }
         public IReadOnlyCollection<Account> InputAccounts { get; set; }
