@@ -26,6 +26,20 @@ namespace builder
 
             //RegulBuilder.Create().Population(pop => pop.WithProfiles()).Build();
 
+            RegulBuilder.OnReglementaire(1)
+                .Population(pop => pop.WithProfiles(1))
+                .Seuil(12).Consecutif().ModeDeCalcul(ModeDeCalcul.DebutAcquisition)
+                .Build();
+
+            RegulBuilder.OnReglementaire(1)
+                .Population(pop => pop.WithProfiles(1))
+                .Seuil(12).Plafond(40).NonConsecutif().ModeDeCalcul(ModeDeCalcul.DouzeDernierMois)
+                .Build();
+
+            RegulBuilder.OnReglementaire(1)
+                .Population(pop => pop.WithProfiles(1))
+                .Plafond(30).Consecutif().ModeDeCalcul(ModeDeCalcul.PeriodeDeCalcul)
+                .Build();
         }
     }
 }
