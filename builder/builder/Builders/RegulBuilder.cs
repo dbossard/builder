@@ -1,24 +1,30 @@
-﻿using builder.Models;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using builder.Models;
 
 namespace builder.Builders
 {
-    public class RegulBuilder
+    public class RegulBuilder : IRoot, IComptesImpactants, IComptesImpactantsResult, ICompteCibleResult, IBuild
     {
-        private IReadOnlyCollection<Account> _inputAccounts;
-        private Account _targetAccount;
+        private IReadOnlyCollection<Account> _inputAccounts = new[] {Comptes.Maladie};
+        private Account _targetAccount = Comptes.Cp2020;
 
-        public RegulBuilder ComptesImpactants(params Account[] inputAccounts)
+        private RegulBuilder()
+        {
+        }
+
+        public static IRoot Create()
+        {
+            return new RegulBuilder();
+        }
+
+        public IComptesImpactantsResult ComptesImpactants(params Account[] inputAccounts)
         {
             _inputAccounts = inputAccounts.ToArray();
             return this;
         }
 
-        public RegulBuilder CompteCible(Account targetAccount)
+        public ICompteCibleResult CompteCible(Account targetAccount)
         {
             _targetAccount = targetAccount;
             return this;
@@ -32,5 +38,27 @@ namespace builder.Builders
                 TargetAccount = _targetAccount
             };
         }
+    }
+
+    public interface IRoot : IComptesImpactants, ICompteCible, IBuild
+    {
+    }
+
+    public interface IComptesImpactants
+    {
+        IComptesImpactantsResult ComptesImpactants(params Account[] inputAccounts);
+    }
+
+    public interface IComptesImpactantsResult : ICompteCible, IBuild
+    {
+    }
+
+    public interface ICompteCible
+    {
+        ICompteCibleResult CompteCible(Account targetAccount);
+    }
+
+    public interface ICompteCibleResult : IBuild
+    {
     }
 }
